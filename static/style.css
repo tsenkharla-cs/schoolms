@@ -1,0 +1,400 @@
+/* ========================================
+   School Management System - Custom Styles
+   ======================================== */
+
+/* --- Global Styles --- */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #64748b;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6;
+    --light-bg: #f8fafc;
+    --dark-bg: #1e293b;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: #334155;
+    line-height: 1.6;
+}
+
+/* --- Navbar --- */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color), #1d4ed8) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 1rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    color: #ffffff !important;  /* ✅ Bright white brand text */
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.nav-link {
+    font-weight: 600;  /* ✅ Bold text */
+    margin: 0 0.5rem;
+    color: #ffffff !important;  /* ✅ Bright white text */
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);  /* ✅ Glow effect */
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;  /* ✅ Keep bright white on hover */
+    background-color: rgba(255, 255, 255, 0.15);  /* ✅ Subtle hover background */
+    transform: translateY(-2px);
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.8);  /* ✅ Stronger glow on hover */
+}
+
+/* ✅ Make logout button stand out */
+.navbar .btn-light {
+    color: #007bff !important;
+    font-weight: 600;
+    border: 2px solid #ffffff;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-light:hover {
+    background-color: #ffffff !important;
+    color: #007bff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* --- Cards --- */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-2px);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+    color: white;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    border-radius: 12px 12px 0 0 !important;
+    border: none;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* --- Forms --- */
+.form-control, .form-select {
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    padding: 0.625rem 0.875rem;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* --- Buttons --- */
+.btn {
+    border-radius: 8px;
+    padding: 0.625rem 1.25rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-color), #059669);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--warning-color), #d97706);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--secondary-color), #475569);
+}
+
+.btn-outline-secondary {
+    border: 2px solid #cbd5e1;
+    color: #475569;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #475569;
+    color: white;
+}
+
+/* --- Tables --- */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* --- Home Page --- */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 16px;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-section p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.feature-card h5 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Footer --- */
+footer {
+    background: var(--dark-bg);
+    color: white;
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+footer p {
+    margin: 0.25rem 0;
+}
+
+/* --- Login Page --- */
+.login-container {
+    max-width: 450px;
+    margin: 4rem auto;
+}
+
+.login-card {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.login-card .card-header {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+/* --- Alerts --- */
+.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 1.75rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .table {
+        font-size: 0.875rem;
+    }
+    
+    .table th, .table td {
+        padding: 0.75rem;
+    }
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease;
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* --- Loading Spinner --- */
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* --- Badge Styles --- */
+.badge {
+    padding: 0.5rem 0.75rem;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.badge-success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* --- Input Group --- */
+.input-group-text {
+    background-color: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+}
+
+.input-group .form-control {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+}
+
+/* --- Page Title --- */
+h2 {
+    color: #1e293b;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--primary-color);
+    display: inline-block;
+}
