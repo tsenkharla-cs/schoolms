@@ -3,7 +3,8 @@ Flask==2.3.3
 Flask-SQLAlchemy==3.0.5
 Flask-CORS==4.0.0
 Werkzeug==2.3.7
-pandas==2.0.3
-openpyxl==3.1.1
-wheel==0.43.0
-setuptools==69.0.3
+pandas==2.1.4
+openpyxl==3.1.2
+setuptools==69.5.1
+wheel==0.44.0
+packaging==24.1
