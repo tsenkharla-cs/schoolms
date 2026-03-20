@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Study Log</h2>
+
+<form method="POST">
+    <div class="row">
+        <div class="col-md-3">
+            <label><b>Date</b></label>
+            <input type="date" name="date" class="form-control" required>
+        </div>
+        <div class="col-md-3">
+            <label><b>Study Type</b></label>
+            <select name="study_type" class="form-select" required>
+                <option value="">Select Study Type</option>
+                {% for st in study_types %}<option value="{{ st }}">{{ st }}</option>{% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label><b>Teacher Name</b></label>
+            <input type="text" name="teacher" class="form-control" required>
+        </div>
+        <div class="col-md-3">
+            <label><b>Study Room</b></label>
+            <select name="room_no" id="roomSelect" class="form-select" onchange="loadStudents()" required>
+                <option value="">Select Study Room</option>
+                {% for room in rooms %}<option value="{{ room }}">{{ room }}</option>{% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h5>Student Attendance</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="studentList">
+                <tr><td colspan="2" class="text-center text-muted">Select Study Room to load students</td></tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="markAllPresent()">Mark All Present</button>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-success">Save Study Log</button>
+    </div>
+</form>
+
+<script>
+// ✅ Add event listener when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const roomSelect = document.getElementById('roomSelect');
+    if (roomSelect) {
+        roomSelect.addEventListener('change', loadStudents);
+    }
+});
+
+function loadStudents() {
+    const roomVal = document.getElementById('roomSelect').value;
+    const tbody = document.getElementById('studentList');
+    
+    console.log('Room selected:', roomVal);
+    
+    if (!roomVal) {
+        tbody.innerHTML = '<tr><td colspan="2" class="text-center text-muted">Select Study Room to load students</td></tr>';
+        return;
+    }
+
+    // ✅ CORRECT API endpoint
+    fetch(`/api/tcs/students?study_room=${roomVal}`)
+        .then(response => {
+            console.log('Response status:', response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Students data:', data);
+            let html = '';
+            if(data.length === 0) {
+                html = '<tr><td colspan="2" class="text-center text-muted">No students found in this room</td></tr>';
+            } else {
+                data.forEach(student => {
+                    html += `
+                        <tr>
+                            <td>${student.name}</td>
+                            <td>
+                                <select name="student_${student.id}" class="form-select form-select-sm" required>
+                                    <option value="Present">Present</option>
+                                    <option value="Absent">Absent</option>
+                                    <option value="Leave">Leave</option>
+                                    <option value="Sick">Sick</option>
+									<option value="No Information">No information</option>
+									<option value="School">School Work</option>
+                                    <option value="Hospital">Hospital Visit</option>
+                                </select>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+            tbody.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading students:', error);
+            tbody.innerHTML = '<tr><td colspan="2" class="text-center text-muted">Error loading students</td></tr>';
+        });
+}
+
+function markAllPresent() {
+    const selects = document.querySelectorAll('select[name^="student_"]');
+    selects.forEach(select => select.value = 'Present');
+}
+</script>
+{% endblock %}

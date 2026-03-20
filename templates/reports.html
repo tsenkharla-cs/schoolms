@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Reports</h2>
+
+<!-- Export Section -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Export Reports</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{{ url_for('export_class_log') }}" class="btn btn-success w-100">
+                    📥 Class Log Excel
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ url_for('export_study_log') }}" class="btn btn-info w-100">
+                    📥 Study Log Excel
+                </a>
+            </div>
+            
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <a href="{{ url_for('export_diary') }}" class="btn btn-warning w-100">
+                    📥 Diary Entries Excel
+                </a>
+            </div>
+            
+        </div>
+        <p class="mt-2 text-muted text-center">Click to download attendance and diary records in Excel format</p>
+    </div>
+</div>
+
+<!-- Report Data -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Diary Entries</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Student Name</th>
+                    <th>Class</th>
+                    <th>Section</th>
+                    <th>Category</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in diary_entries %}
+                <tr>
+                    <td>{{ entry.date }}</td>
+                    <td>{{ entry.student_name }}</td>
+                    <td>{{ entry.class_name }}</td>
+                    <td>{{ entry.section }}</td>
+                    <td>
+                        <span class="badge badge-{{ 'danger' if entry.category == 'Discipline Issues' else 'success' if entry.category == 'Homework' else 'info' }}">
+                            {{ entry.category }}
+                        </span>
+                    </td>
+                    <td>{{ entry.remarks[:50] }}{% if entry.remarks|length > 50 %}...{% endif %}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No Diary entries found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h5 class="mb-0">Attendance Reports</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Class/Room</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in class_logs %}
+                <tr>
+                    <td>{{ log.date }}</td>
+                    <td>Class Log</td>
+                    <td>{{ log.class_name }} - {{ log.section }}</td>
+                    <td>{{ log.subject }}</td>
+                </tr>
+                {% endfor %}
+                {% for log in study_logs %}
+                <tr>
+                    <td>{{ log.date }}</td>
+                    <td>Study Log</td>
+                    <td>Room {{ log.room_no }}</td>
+                    <td>{{ log.study_type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

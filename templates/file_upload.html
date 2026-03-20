@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>File Upload</h2>
+
+<div class="card mb-4">
+    <div class="card-header">Upload New File</div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <label><b>Category</b></label>
+                    <select name="category" class="form-select" required>
+                        <option value="">Select Category</option>
+                        {% for cat in categories %}
+                        <option value="{{ cat }}">{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label><b>Select File</b></label>
+                    <input type="file" name="file" class="form-control" accept=".pdf,.doc,.docx" required>
+                    <small class="text-muted">Allowed: PDF, Word (Max 16MB)</small>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Upload File</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">Upload History</div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Uploaded By</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ✅ Use recent_files instead of FileUpload.query -->
+                {% for file in recent_files %}
+                <tr>
+                    <td>{{ file.original_filename }}</td>
+                    <td>{{ file.category }}</td>
+                    <td>{{ file.file_type.upper() }}</td>
+                    <td>{{ file.uploaded_by }}</td>
+                    <td>{{ file.upload_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>
+                        <a href="{{ url_for('file_list', category=file.category) }}" class="btn btn-sm btn-info">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {% if not recent_files %}
+        <p class="text-center text-muted">No files uploaded yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

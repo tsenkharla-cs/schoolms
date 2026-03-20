@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4">Welcome to School Management System</h1>
+    <p class="lead">Digital School Management Platform for Teachers and Administrators</p>
+    {% if session.get('logged_in') %}
+        <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+    {% else %}
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg"></a>
+    {% endif %}
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Class Log Book</h5>
+                <p class="card-text">This class log is used to record students’ attendance for each individual learning 
+				experience conducted in the domain throughout the day. It helps teachers track participation and maintain
+				an accurate daily record of student engagement in different learning activities.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Study Log Book</h5>
+                <p class="card-text">This section records student attendance and monitors room usage during four structured study 
+				sessions: Morning, Evening, Night, and Sunday Reading. It ensures accurate tracking of students during study hours,
+				promotes discipline, and helps the school maintain an organized and productive learning environment..</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Student Diary</h5>
+                <p class="card-text">This section records students’ behavior and academic progress, including conduct, participation, 
+				performance, strengths, and areas for improvement. It helps teachers monitor overall development, provide timely support,
+				and maintain effective communication with parents and school administration.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">File Upload</h5>
+                <p class="card-text">This feature allows secure file upload and management of digital documents by coordinators
+				coordinating activities under the Five Areas of Development. Coordinators can upload their activity reports and 
+				related documents in DOC or PDF format. The system ensures organized storage, easy access, and efficient record keeping, 
+				enabling smooth compilation and management of reports for effective school administration.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
